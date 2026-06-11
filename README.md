@@ -4,7 +4,7 @@ This project focuses on agricultural technology, including crop recommendation, 
 
 ## Features
 - Crop Recommendation
-- Soil Health Analysis
+- Crop Leaf Disease Detection
 - NDVI Monitoring
 - Chatbot Support
 - Fertilizer Recommendation
