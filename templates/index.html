@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Icons & Animation -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+
+
+
+
+
+
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!--  <link rel="stylesheet" href="style.css">  -->
+
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <button class="menu-btn" onclick="toggleMenu()"> ☰ </button>
+      <div class="dropdown" id="menuDropdown">
+        <a href="/crop_details">🏢 Crop Details</a>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSeKZQGL1XY-ajL5ZkWBweqD6W-5YuPZxn-QyIgE-9nDcMZUCQ/viewform?usp=publish-editor">📞
+          Contact</a>
+        <a href="#contact">ℹ️ About</a>
+        <a href="/soil_health">🚨 Soil Health & Checkup</a>
+        <a href="/chatbot">🤖 Chatbot</a>
+        <a href="/learning">📊 Learn Farming Techniques</a>
+      </div>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREBrOntjdbxL2rZ7wCk-iKYjtxobGU8tWG0Q&s"
+        alt="Logo">
+      <span>AgriTech Solutions</span>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#page1">Home</a>
+      <a href="#our_service">Services</a>
+      <a href="/ndvi_index">Crop Monitoring</a>
+      <a href="/chatbot">Chatbot</a>
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSeKZQGL1XY-ajL5ZkWBweqD6W-5YuPZxn-QyIgE-9nDcMZUCQ/viewform?usp=publish-editor">Contact</a>
+  </header>
+
+
+  <div id="page1">
+    <div class="page1parts">
+      <img
+        src="https://static.vecteezy.com/system/resources/previews/035/742/223/non_2x/artificial-intelligent-icon-line-icon-for-your-website-mobile-presentation-and-logo-design-vector.jpg"
+        alt="">
+    </div>
+    <div class="page1parts">
+      <h1>Transforming the way of Farming</h1>
+      <p>"Face challenges as opportunities, navigates innovation. With determination and belief in your potential, every
+        hurdle becomes a stepping stone to success. Our Smart Agriculture Decision
+        Support System is designed to assist farmers in making data-driven decisions using modern
+        machine learning techniques."</p>
+
+      <form action="/fer_rec" method="GET">
+        <button id="fertilizer_rec" type="submit">Fertilizer Recommendation</button>
+      </form>
+      <form action="/crop_rec" method="GET">
+        <button id="crop_reccomendation" type="submit">Crop Recommendation</button>
+      </form>
+      <form action="/crop_stress" method="GET">
+        <button id="get_started" type="submit">Crop Stress Detection</button>
+      </form>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div id="page2">
+    <h1>Elevate Crop Yeild</h1>
+    <h1>Work Hard & Grow Your Crop Health</h1>
+    <!--    <img src="https://media.istockphoto.com/id/1303644694/vector/farmer-working-on-garden.jpg?s=612x612&w=0&k=20&c=a1MNW6n2ZlHGRMikxr34Bzk6qJpZ0oRyd8pwfTvmJ_o=" alt="">  -->
+    <!-- Floating Weather Card -->
+    <div class="weather-float">
+      <h2>🌦 Live Weather</h2>
+
+      <div class="weather-row">
+        <span>📍 Location</span>
+        <b id="city">Detecting...</b>
+      </div>
+
+      <div class="weather-row">
+        <span>🌡 Temperature</span>
+        <b id="temp">-- °C</b>
+      </div>
+
+      <div class="weather-row">
+        <span>💧 Humidity</span>
+        <b id="humidity">-- %</b>
+      </div>
+
+      <div class="weather-row">
+        <span>🌬 Wind</span>
+        <b id="wind">-- km/h</b>
+      </div>
+
+      <div class="weather-row">
+        <span>☁ Condition</span>
+        <b id="condition">--</b>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div id="our_service">
+    <h1>Our Services</h1>
+  </div>
+
+  <div id="our_service_content">
+
+    <section id="services">
+      <div class="cards">
+        <div class="card">
+          <i class="fa-solid fa-seedling"></i>
+          <h3>Fertilizer Recommendation</h3>
+          <p>Custom fertilizer prescriptions based on real-time NPK soil analysis.</p>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-chart-line"></i>
+          <h3>Crop Analysis</h3>
+          <p>Predictive modeling to help you achieve 20% higher seasonal output</p>
+        </div>
+
+        <div class="card">
+          <i class="fa-solid fa-tractor"></i>
+          <h3>Smart Farming</h3>
+          <p>Identify crop density and stress patterns using aerial multispectral imaging.</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <div id="composition_table">
+
+      <h2>🌱 Fertilizer Composition Table</h2>
+      <p>“Understanding fertilizer composition is essential for precision <br> The table below highlights the percentage
+        of key nutrients present in different <br>fertilizers and their role in crop development.”</p>
+
+      <table class="table table-bordered table-striped">
+
+        <thead>
+          <tr>
+            <th>Fertilizer Name</th>
+            <th>Nitrogen (N %)</th>
+            <th>Phosphorus (P %)</th>
+            <th>Potassium (K %)</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+
+        <tr>
+          <td>Urea</td>
+          <td>46</td>
+          <td>0</td>
+          <td>0</td>
+          <td>Leaf Growth</td>
+        </tr>
+
+        <tr>
+          <td>DAP</td>
+          <td>18</td>
+          <td>46</td>
+          <td>0</td>
+          <td>Root Development</td>
+        </tr>
+
+        <tr>
+          <td>MOP (Potash)</td>
+          <td>0</td>
+          <td>0</td>
+          <td>60</td>
+          <td>Disease Resistance</td>
+        </tr>
+
+        <tr>
+          <td>NPK 10-26-26</td>
+          <td>10</td>
+          <td>26</td>
+          <td>26</td>
+          <td>Flowering Stage</td>
+        </tr>
+
+        <tr>
+          <td>NPK 20-20-20</td>
+          <td>20</td>
+          <td>20</td>
+          <td>20</td>
+          <td>All Crop Stages</td>
+        </tr>
+
+        <tr>
+          <td>SSP</td>
+          <td>0</td>
+          <td>16</td>
+          <td>0</td>
+          <td>Flower Formation</td>
+        </tr>
+
+        <tr>
+          <td>Ammonium Sulphate</td>
+          <td>21</td>
+          <td>0</td>
+          <td>0</td>
+          <td>Sulfur Deficiency</td>
+        </tr>
+
+      </table>
+    </div>
+
+
+
+
+    <!--makiing fertilizer in home
+-->
+    <div id="home_made_fertilizer_heading">
+      <h1>Making fertilizer In Home</h1>
+    </div>
+    <div id="home_made_fertilizer">
+      <div id="home_made_fertilizer_1">
+        <img
+          src="https://media.istockphoto.com/id/1690173073/vector/composting-cycle-from-organic-gardeners-make-compost-from-organic-garden-waste.jpg?s=612x612&w=0&k=20&c=iTFhgHynnsfDypsU_HuGBLQkUMPBUF1aUZfifaVQfLE="
+          alt="">
+
+      </div>
+      <div id="home_made_fertilizer_1">
+        <img
+          src="https://img.freepik.com/premium-vector/compost-box-humus-organic-material-wood-bin-decomposition-agriculture-bio-waste-manure-fertilizer-composting-fruit-vegetable-food-dirt-pile-soil-garish-vector-illustration_81894-11082.jpg"
+          alt="">
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+    <div id="home_made_fertilizer">
+      <div id="home_made_fertilizer_2">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/000/154/101/non_2x/farmer-digging-organic-fertilizer-illustration-vector.jpg"
+          alt="">
+
+      </div>
+      <div id="home_made_fertilizer_2">
+        <img src="https://img.freepik.com/premium-vector/farmer-spraying-fertilizer-vector-illustration_82574-2029.jpg"
+          alt="">
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+    <div class="organic-container">
+
+      <h2>🏡 Homemade Organic Fertilizer Preparation Table</h2>
+      <p>Simple, eco-friendly organic fertilizers made using household materials</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Organic Fertilizer</th>
+            <th>Raw Materials Needed</th>
+            <th>Preparation Method</th>
+            <th>Nutrients Supplied</th>
+            <th>How to Use</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><b>Compost</b></td>
+            <td>Kitchen waste, dry leaves, soil</td>
+            <td>Layer green & dry waste, keep moist, turn every 7–10 days (30–45 days)</td>
+            <td>N, P, K, micronutrients</td>
+            <td><span class="badge soil">Mix Before Planting</span></td>
+            <td>All crops</td>
+          </tr>
+
+          <tr>
+            <td><b>Vermicompost</b></td>
+            <td>Earthworms, veg waste, cow dung</td>
+            <td>Add waste, introduce worms, keep moist (45–60 days)</td>
+            <td>High N, P, K</td>
+            <td><span class="badge soil">Top Dressing</span></td>
+            <td>Vegetables, fruits</td>
+          </tr>
+
+          <tr>
+            <td><b>Eggshell Powder</b></td>
+            <td>Eggshells</td>
+            <td>Wash → dry → roast → grind</td>
+            <td>Calcium (Ca)</td>
+            <td><span class="badge soil">Near Roots</span></td>
+            <td>Tomato, pepper, flowers</td>
+          </tr>
+
+          <tr>
+            <td><b>Banana Peel Fertilizer</b></td>
+            <td>Banana peels</td>
+            <td>Chop peels, soak in water 24 hrs</td>
+            <td>Potassium (K)</td>
+            <td><span class="badge liquid">Weekly Soil Water</span></td>
+            <td>Flowering & fruit crops</td>
+          </tr>
+
+          <tr>
+            <td><b>Neem Cake Liquid</b></td>
+            <td>Neem cake</td>
+            <td>Soak overnight, filter</td>
+            <td>N, pest repellent</td>
+            <td><span class="badge liquid">Soil Drench</span></td>
+            <td>All crops</td>
+          </tr>
+
+          <tr>
+            <td><b>Cow Dung Manure</b></td>
+            <td>Cow dung, water</td>
+            <td>Decompose for 15–20 days</td>
+            <td>N, P, K</td>
+            <td><span class="badge soil">Basal Application</span></td>
+            <td>Field crops</td>
+          </tr>
+
+          <tr>
+            <td><b>Rice Water</b></td>
+            <td>Washed rice water</td>
+            <td>Ferment 24 hours</td>
+            <td>Microbes, mild nutrients</td>
+            <td><span class="badge liquid">Pour into Soil</span></td>
+            <td>Seedlings</td>
+          </tr>
+
+          <tr>
+            <td><b>Fish Waste Fertilizer</b></td>
+            <td>Fish waste, jaggery</td>
+            <td>Ferment sealed for 15 days</td>
+            <td>High Nitrogen</td>
+            <td><span class="badge liquid">Dilute 1:10</span></td>
+            <td>Leafy vegetables</td>
+          </tr>
+
+          <tr>
+            <td><b>Wood Ash</b></td>
+            <td>Clean wood ash</td>
+            <td>Sieve ash before use</td>
+            <td>Potassium (K), Calcium</td>
+            <td><span class="badge soil">Small Quantity</span></td>
+            <td>Acidic soils</td>
+          </tr>
+
+          <tr>
+            <td><b>Green Manure Tea</b></td>
+            <td>Green leaves, water</td>
+            <td>Soak leaves for 5-7 days</td>
+            <td>Nitrogen</td>
+            <td><span class="badge liquid">Soil Drench</span></td>
+            <td>Rapid growth</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="contact">
+      <ul>
+        <p>Get to Know Us</p>
+        <a>Careers</a>
+        <a>Blog</a>
+        <a>About our Technologies</a>
+        <a>Investor Relations</a>
+
+      </ul>
+      <ul>
+        <p> Connect with Us</p>
+        <a> <i class="ri-facebook-circle-fill" style="font-size: 20px;"></i> Facebook</a>
+        <a> <i class="ri-twitter-fill" style="font-size: 20px;"></i> Twitter</a>
+        <a> <i class="ri-instagram-line" style="font-size: 20px;"></i> Instagram</a>
+      </ul>
+
+      <ul>
+
+        <p>Let Us Help You</p>
+        <a href="">service</a>
+        <a href="">blog</a>
+
+        <a>Your Account</a>
+
+        <a>100% Account Protection</a>
+        <a> App Download</a>
+        <a>Help</a>
+      </ul>
+      <ul>
+        <p>ABOUT</p>
+        <a>Name - Akarsh Tiwari</a>
+        <a>gmail - tiwariakarsh52@gmail.com</a>
+        <a>No.- 7999260059</a>
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      function toggleMenu() {
+        document.getElementById("menuDropdown").classList.toggle("active");
+      }
+
+      // Close menu if clicked outside
+      window.onclick = function (event) {
+        if (!event.target.matches('.menu-btn')) {
+          document.getElementById("menuDropdown").classList.remove("active");
+        }
+      }
+
+
+      document.addEventListener("DOMContentLoaded", () => {
+
+        const API_KEY = "4b07b13a24464a43076fdc75d48f61c9";
+
+        function getWeatherByLocation(lat, lon) {
+          fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`)
+            .then(res => res.json())
+            .then(data => {
+              console.log("Weather Data:", data);
+
+              document.getElementById("city").innerText = data.name;
+              document.getElementById("temp").innerText = data.main.temp + " °C";
+              document.getElementById("humidity").innerText = data.main.humidity + " %";
+              document.getElementById("wind").innerText = data.wind.speed + " km/h";
+              document.getElementById("condition").innerText = data.weather[0].main;
+            })
+            .catch(err => console.error("Weather error:", err));
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          pos => getWeatherByLocation(pos.coords.latitude, pos.coords.longitude),
+          err => {
+            console.error("Location error:", err);
+            document.getElementById("city").innerText = "Location blocked";
+          }
+        );
+
+      });
+    </script>
+</body>
+
+</html>

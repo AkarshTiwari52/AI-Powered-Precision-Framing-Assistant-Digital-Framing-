@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AgrioSense AI | Crop Prediction</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif
+    }
+
+    body {
+      background: #f0f4f0;
+      padding: 40px;
+      color: #1b4332;
+    }
+
+    /* ===== HEAD ===== */
+    h1 {
+      text-align: center;
+      font-size: 2.4rem
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #52796f;
+      margin-bottom: 30px
+    }
+
+    /* ===== GRID ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: #fff;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(45, 106, 79, 0.2);
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem
+    }
+
+    input {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1.5px solid #b7e4c7;
+      background: #f7fff7;
+    }
+
+    /* ===== BUTTON ===== */
+    button {
+      display: block;
+      margin: 40px auto;
+      padding: 16px 50px;
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b4332
+    }
+
+    /* ===== OUTPUT ===== */
+    .output-section {
+      margin-top: 40px;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .output-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .output-card {
+      padding: 22px;
+      border-radius: 18px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .green {
+      background: white
+    }
+
+    .blue {
+      background: white
+    }
+
+    .yellow {
+      background: white 
+    }
+
+    .output-card span {
+      display: block;
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .model-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      font-size: 14px;
+    }
+
+    .model-metric .label {
+      color: #555;
+    }
+
+    .model-metric .value {
+      font-weight: 600;
+      color: #16a34a;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🌱 AgriTech Solution AI</h1>
+  <p class="subtitle">Smart Crop Recommendation using Soil & Climate Data</p>
+
+  <form method="POST" action="/crop_rec">
+
+    <div class="grid">
+      <div class="card">
+        <label>Nitrogen (N)</label>
+        <input name="n" required>
+      </div>
+
+      <div class="card">
+        <label>Phosphorus (P)</label>
+        <input name="p" required>
+      </div>
+
+      <div class="card">
+        <label>Potassium (K)</label>
+        <input name="k" required>
+      </div>
+
+      <div class="card">
+        <label>Temperature (°C)</label>
+        <input name="temp" required>
+      </div>
+      <div class="card">
+        <label>ph</label>
+        <input name="ph" required>
+      </div>
+
+      <div class="card">
+        <label>Humidity (%)</label>
+        <input name="humidity" required>
+      </div>
+
+      <div class="card">
+        <label>Rainfall (mm)</label>
+        <input name="rainfall" required>
+      </div>
+    </div>
+
+    <button type="submit">🌱 Predict Crop</button>
+  </form>
+
+  {% if result %}
+  <div class="output-section">
+
+    <h2 class="output-title">📊 Crop Recommendation Report</h2>
+
+    <div class="grid">
+
+      <div class="output-card green">
+        <span>Recommended Crop</span>
+        {{ result["Recommended Crop"] }}
+      </div>
+
+      <div class="output-card blue">
+        <span>Suitable Season</span>
+        {{ result["Season"] }}
+      </div>
+
+      <div class="output-card yellow">
+        <span>Expected Yield</span>
+        {{ result["Yield"] }}
+      </div>
+
+    </div>
+
+  </div>
+  {% endif %}
+
+
+
+  {% if metrics %}
+  <div class="model-metric">
+    <span class="label">Model Accuracy</span>
+    <span class="value">{{ metrics.accuracy }}%</span>
+  </div>
+  {% endif %}
+
+
+  {% if lime %}
+  <div class="output-section">
+    <h3>📌 Why this crop? (AI Explanation)</h3>
+    <ul>
+      {% for item in lime %}
+      <li>
+        {% if item.impact > 0 %}
+        ✅
+        {% else %}
+        ⚠️
+        {% endif %}
+        <b>{{ item.feature }}</b>
+        (impact: {{ item.impact }})
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if rag %}
+  <div class="output-section">
+    <h3>📚 Expert Agricultural Explanation</h3>
+    <p style="background:#f1faee;padding:15px;border-radius:10px">
+      {{ rag }}
+    </p>
+  </div>
+  {% endif %}
+
+</body>
+
+</html>

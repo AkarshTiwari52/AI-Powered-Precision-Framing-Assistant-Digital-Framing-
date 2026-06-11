@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Agriculture Nutrient Reference</title>
+
+  <style>
+    body {
+      font-family: "Outfit", Arial, sans-serif;
+      background: #f4f7f4;
+      padding: 30px;
+    }
+
+    /* CONTAINER */
+    .table-box {
+      max-width: 1150px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .table-box h2 {
+      text-align: center;
+      color: #2d6a4f;
+      margin-bottom: 8px;
+    }
+
+    .table-box p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    /* TABLE */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: #2d6a4f;
+      color: #fff;
+    }
+
+    th,
+    td {
+      padding: 14px 12px;
+      text-align: center;
+    }
+
+    th {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    td {
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f0f7f2;
+    }
+
+    tbody tr:hover {
+      background: #d8f3dc;
+      transition: 0.2s ease;
+    }
+
+    /* BADGES */
+    .badge {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .basal {
+      background: #e9f5db;
+      color: #2d6a4f
+    }
+
+    .growth {
+      background: #e0f2fe;
+      color: #1e3a8a
+    }
+
+    .flower {
+      background: #fff7ed;
+      color: #9a3412
+    }
+
+    .early {
+      background: #f3e8ff;
+      color: #6b21a8
+    }
+
+    .deficiency {
+      background: #fee2e2;
+      color: #991b1b
+    }
+
+    .control {
+      background: #ecfeff;
+      color: #155e75
+    }
+
+    @media(max-width:768px) {
+
+      th,
+      td {
+        font-size: 0.8rem
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ================= ORGANIC FERTILIZER TABLE ================= -->
+  <div class="table-box">
+    <h2>🌿 Organic Fertilizer Composition Table</h2>
+    <p>Sustainable nutrient sources for healthy soil & crops</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Organic Fertilizer</th>
+          <th>N (%)</th>
+          <th>P (%)</th>
+          <th>K (%)</th>
+          <th>Key Benefits</th>
+          <th>Best Usage Stage</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Farmyard Manure (FYM)</td>
+          <td>0.5</td>
+          <td>0.2</td>
+          <td>0.5</td>
+          <td>Improves soil structure & microbial activity</td>
+          <td><span class="badge basal">Basal</span></td>
+        </tr>
+
+        <tr>
+          <td>Compost</td>
+          <td>1.0</td>
+          <td>0.5</td>
+          <td>1.0</td>
+          <td>Enhances fertility & water retention</td>
+          <td><span class="badge basal">Pre-Sowing</span></td>
+        </tr>
+
+        <tr>
+          <td>Vermicompost</td>
+          <td>1.5</td>
+          <td>0.9</td>
+          <td>1.2</td>
+          <td>Boosts root growth & yield</td>
+          <td><span class="badge growth">Vegetative</span></td>
+        </tr>
+
+        <tr>
+          <td>Green Manure</td>
+          <td>1.8</td>
+          <td>0.6</td>
+          <td>1.5</td>
+          <td>Fixes nitrogen naturally</td>
+          <td><span class="badge basal">Before Planting</span></td>
+        </tr>
+
+        <tr>
+          <td>Neem Cake</td>
+          <td>5.0</td>
+          <td>1.0</td>
+          <td>1.5</td>
+          <td>Pest control & slow nutrient release</td>
+          <td><span class="badge flower">Basal + Flowering</span></td>
+        </tr>
+
+        <tr>
+          <td>Bone Meal</td>
+          <td>3.0</td>
+          <td>15.0</td>
+          <td>0.0</td>
+          <td>Strong root & flower development</td>
+          <td><span class="badge flower">Flowering</span></td>
+        </tr>
+
+        <tr>
+          <td>Oil Cake</td>
+          <td>4.0</td>
+          <td>2.0</td>
+          <td>1.5</td>
+          <td>Improves soil microbes</td>
+          <td><span class="badge growth">Growth</span></td>
+        </tr>
+
+        <tr>
+          <td>Poultry Manure</td>
+          <td>3.5</td>
+          <td>2.5</td>
+          <td>1.5</td>
+          <td>High nutrient content</td>
+          <td><span class="badge control">Controlled</span></td>
+        </tr>
+
+        <tr>
+          <td>Fish Meal</td>
+          <td>6.0</td>
+          <td>3.0</td>
+          <td>0.5</td>
+          <td>Rapid vegetative growth</td>
+          <td><span class="badge early">Early Growth</span></td>
+        </tr>
+
+        <tr>
+          <td>Wood Ash</td>
+          <td>0.0</td>
+          <td>1.0</td>
+          <td>5.0</td>
+          <td>Corrects soil acidity & potassium supply</td>
+          <td><span class="badge deficiency">K Deficiency</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ================= CROP NUTRIENT TABLE ================= -->
+  <div class="table-box">
+    <h2>🌱 Crop Nutrient Requirement Table</h2>
+    <p>Recommended NPK requirement (kg/ha) for major crops</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Crop</th>
+          <th>N (kg/ha)</th>
+          <th>P (kg/ha)</th>
+          <th>K (kg/ha)</th>
+          <th>Major Growth Focus</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Rice</td>
+          <td>120</td>
+          <td>60</td>
+          <td>40</td>
+          <td>Tillering & Grain Filling</td>
+        </tr>
+        <tr>
+          <td>Wheat</td>
+          <td>120</td>
+          <td>60</td>
+          <td>40</td>
+          <td>Root & Grain Development</td>
+        </tr>
+        <tr>
+          <td>Maize</td>
+          <td>150</td>
+          <td>75</td>
+          <td>50</td>
+          <td>Vegetative Growth</td>
+        </tr>
+        <tr>
+          <td>Cotton</td>
+          <td>100</td>
+          <td>50</td>
+          <td>50</td>
+          <td>Boll Formation</td>
+        </tr>
+        <tr>
+          <td>Sugarcane</td>
+          <td>250</td>
+          <td>115</td>
+          <td>115</td>
+          <td>Cane & Juice Quality</td>
+        </tr>
+        <tr>
+          <td>Barley</td>
+          <td>100</td>
+          <td>50</td>
+          <td>40</td>
+          <td>Early Growth</td>
+        </tr>
+        <tr>
+          <td>Groundnut</td>
+          <td>25</td>
+          <td>50</td>
+          <td>75</td>
+          <td>Pod Formation</td>
+        </tr>
+        <tr>
+          <td>Soybean</td>
+          <td>30</td>
+          <td>60</td>
+          <td>40</td>
+          <td>Protein Synthesis</td>
+        </tr>
+        <tr>
+          <td>Potato</td>
+          <td>180</td>
+          <td>100</td>
+          <td>120</td>
+          <td>Tuber Formation</td>
+        </tr>
+        <tr>
+          <td>Tomato</td>
+          <td>150</td>
+          <td>75</td>
+          <td>150</td>
+          <td>Fruit Development</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+</html>

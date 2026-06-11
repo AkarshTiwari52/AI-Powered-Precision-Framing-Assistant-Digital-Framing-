@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>NDVI Analysis | AgrioSense</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --primary: #2f855a;
+      --primary-dark: #276749;
+      --bg: #f7fafc;
+      --card: #ffffff;
+      --text: #1a202c;
+      --muted: #718096;
+      --border: #e2e8f0;
+      --success: #38a169;
+      --warning: #dd6b20;
+      --danger: #e53e3e;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* ===== TOP BAR ===== */
+    .header {
+      background: #ffffff;
+      padding: 18px 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .nav {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    /* ===== LAYOUT ===== */
+    .wrapper {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--card);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      padding: 28px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    /* ===== GRID ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    /* ===== UPLOAD ===== */
+    .upload {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: .25s;
+    }
+
+    .upload:hover {
+      border-color: var(--primary);
+      background: #f0fff4;
+    }
+
+    .upload input {
+      display: none;
+    }
+
+    .upload label {
+      color: var(--primary);
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== BUTTON ===== */
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--primary-dark);
+    }
+
+    /* ===== IMAGE PREVIEW ===== */
+    .preview img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+      border: 1px solid var(--border);
+    }
+
+    /* ===== RESULT ===== */
+    .metric {
+      font-size: 34px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .status {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .success {
+      color: var(--success);
+    }
+
+    .warning {
+      color: var(--warning);
+    }
+
+    .danger {
+      color: var(--danger);
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .list {
+      padding-left: 18px;
+      font-size: 14px;
+    }
+
+    /* ===== ACTION BOX ===== */
+    .action {
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    .irrigation {
+      background: #ebf8ff;
+    }
+
+    .fertilizer {
+      background: #f0fff4;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      text-align: center;
+      margin: 30px 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">
+    <div class="brand">AgriTech AI</div>
+    <div class="nav">NDVI Intelligence Platform</div>
+  </div>
+
+  <div class="wrapper">
+
+    <div class="grid">
+
+      <!-- ===== LEFT: UPLOAD ===== -->
+      <div class="card">
+        <h2>Crop Image Analysis</h2>
+        <p class="section-title">Upload crop image for NDVI assessment</p>
+
+        <form method="POST" action="/ndvi_index" enctype="multipart/form-data">
+          <div class="upload">
+            <input type="file" id="imageInput" name="leaf_image" accept="image/*" required>
+            <label for="imageInput">Click to upload crop image</label>
+          </div>
+
+          <div class="preview" id="previewBox" style="display:none;">
+            <img id="previewImg">
+          </div>
+
+          <button type="submit">Run NDVI Analysis</button>
+        </form>
+      </div>
+
+      <!-- ===== RIGHT: RESULT ===== -->
+      {% if result %}
+      <div class="card">
+
+        <div class="metric">{{ result.ndvi_value }}</div>
+
+        <div class="status
+    {% if 'Healthy' in result.vegetation_status %}success
+    {% elif 'Moderate' in result.vegetation_status %}warning
+    {% else %}danger{% endif %}">
+          {{ result.vegetation_status }}
+        </div>
+
+        <div class="section-title">Possible Causes</div>
+        <ul class="list">
+          {% for c in result.possible_causes %}
+          <li>{{ c }}</li>
+          {% endfor %}
+        </ul>
+
+        <div class="section-title" style="margin-top:16px;">Recommended Actions</div>
+
+        <div class="action irrigation">
+          💧 Improve irrigation & soil moisture management
+        </div>
+
+        <div class="action fertilizer">
+          🌿 Apply organic nutrients & mulching
+        </div>
+
+      </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 AgrioSense • Precision Agriculture Platform
+  </div>
+
+  <script>
+    const input = document.getElementById("imageInput");
+    const preview = document.getElementById("previewBox");
+    const img = document.getElementById("previewImg");
+
+    input.addEventListener("change", () => {
+      if (input.files[0]) {
+        img.src = URL.createObjectURL(input.files[0]);
+        preview.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+
+</html>

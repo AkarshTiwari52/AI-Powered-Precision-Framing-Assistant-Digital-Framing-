@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AgrioSense AI</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Outfit', sans-serif
+    }
+
+    body {
+      background: #f0f4f0;
+      padding: 40px;
+      color: #1b4332;
+    }
+
+    /* ===== HEAD ===== */
+    h1 {
+      text-align: center;
+      font-size: 2.4rem
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #52796f;
+      margin-bottom: 30px
+    }
+
+    /* ===== GRID ===== */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      background: #fff;
+      padding: 22px;
+      border-radius: 18px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(45, 106, 79, 0.2);
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem
+    }
+
+    input,
+    select {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1.5px solid #b7e4c7;
+      background: #f7fff7;
+    }
+
+    /* ===== BUTTON ===== */
+    button {
+      display: block;
+      margin: 40px auto;
+      padding: 16px 50px;
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b4332
+    }
+
+    /* ===== OUTPUT ===== */
+    .output-section {
+      margin-top: 40px;
+      animation: fadeUp 0.5s ease;
+    }
+
+    .output-title {
+      text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+
+    .output-card {
+      padding: 20px;
+      border-radius: 18px;
+      color: black;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .green {
+      background: white
+    }
+
+    .blue {
+      background: white
+    }
+
+    .yellow {
+      background: white
+    }
+
+    .red {
+      background: white
+    }
+
+    .purple {
+      background: white
+    }
+
+    .lime {
+      background: #ecfdf5
+    }
+
+    .output-card span {
+      display: block;
+      font-size: 0.85rem;
+      color: #555;
+      margin-bottom: 5px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🌾 AgriTech Solutions AI</h1>
+  <p class="subtitle">Smart Fertilizer Recommendation using Soil Analytics & ML</p>
+
+  <form method="POST" action="/fer_rec">
+
+    <div class="grid">
+      <div class="card">
+        <label>Nitrogen (N)</label>
+        <input name="n" required>
+      </div>
+      <div class="card">
+        <label>Phosphorus (P)</label>
+        <input name="p" required>
+      </div>
+      <div class="card">
+        <label>Potassium (K)</label>
+        <input name="k" required>
+      </div>
+      <div class="card">
+        <label>Soil Moisture (%)</label>
+        <input name="moisture" required>
+      </div>
+      <div class="card">
+        <label>Temperature (°C)</label>
+        <input name="temp" required>
+      </div>
+      <div class="card">
+        <label>Humidity (%)</label>
+        <input name="humidity" required>
+      </div>
+
+      <div class="card">
+        <label>Soil Type</label>
+        <select name="soil_type" required>
+          <option value="">-- Select Soil Type --</option>
+          <option value="black_soil">Black Soil</option>
+          <option value="red_soil">Red Soil</option>
+          <option value="alluvial_soil">Alluvial Soil</option>
+          <option value="laterite_soil">Laterite Soil</option>
+          <option value="sandy_soil">Sandy Soil</option>
+          <option value="clay_soil">Clay Soil</option>
+          <option value="loamy_soil">Loamy Soil</option>
+        </select>
+      </div>
+      <div class="card">
+        <label>Crop</label>
+        <select name="crop">
+          <option value="">-- Select Crop --</option>
+          <option value="rice">Rice</option>
+          <option value="wheat">Wheat</option>
+          <option value="maize">Maize</option>
+          <option value="cotton">Cotton</option>
+          <option value="sugarcane">Sugarcane</option>
+          <option value="soybean">Soybean</option>
+          <option value="groundnut">Groundnut</option>
+          <option value="pulses">Pulses</option>
+          <option value="millets">Millets</option>
+          <option value="vegetables">Vegetables</option>
+        </select>
+      </div>
+    </div>
+
+    <button type="submit">🌱 Predict Fertilizer</button>
+  </form>
+
+  {% if result %}
+  <div class="output-section">
+
+    <h2 class="output-title">📊 Soil & Fertilizer Report</h2>
+
+    <div class="grid">
+
+      <div class="output-card green">
+        <span>Crop</span>
+        {{ result["Crop"] }}
+      </div>
+
+      <div class="output-card blue">
+        <span>Recommended Fertilizer</span>
+        {{ result["Recommended Fertilizer"] }}
+      </div>
+
+      <div class="output-card yellow">
+        <span>Quantity Required</span>
+        {{ result["Quantity (kg/ha)"] }} kg / ha
+      </div>
+
+      <div class="output-card red">
+        <span>Nutrient Deficiency</span>
+        {{ result["Nutrient Deficiency"] }}
+      </div>
+
+      <div class="output-card lime">
+        <span>Sustainability</span>
+        {{ result["Sustainability"] }}
+      </div>
+
+      <div class="output-card purple">
+        <span>Application Schedule</span>
+        {{ result["Application Schedule"] }}
+      </div>
+
+    </div>
+
+  </div>
+  {% endif %}
+
+
+
+  {% if lime %}
+  <div class="output-section">
+    <h3>📌 Why this Fertilizer? (AI Explanation)</h3>
+    <ul>
+      {% for item in lime %}
+      <li>
+        {% if item.impact > 0 %}
+        ✅
+        {% else %}
+        ⚠️
+        {% endif %}
+        <b>{{ item.feature }}</b>
+        (impact: {{ item.impact }})
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if rag %}
+  <div class="output-section">
+    <h3>📚 Expert Agricultural Explanation</h3>
+    <p style="background:#f1faee;padding:15px;border-radius:10px">
+      {{ rag }}
+    </p>
+  </div>
+  {% endif %}
+
+
+</body>
+
+</html>
